@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Yes Play</h1>
+    {% for key,value in sample.items %} 
+        
+        {% if key == "image" %}
+            <div >
+                <img style="width: 1000px; height: 600px;" alt="Embedded Image" src="data:image/png;base64,{{value}}">
+            </div>
+        {% else %}
+            <p>{{value}}</p>
+        {% endif %}
+    {% endfor %}
+    <br>
+
+{% endblock %}

@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views import View 
-
+import base64
 from .models import *
 from .forms import *
+from .gameController import GameController
 
 class IndexView(View):
     template_name = "chess/index.html"
@@ -30,5 +31,10 @@ class GamePlay(View):
     template_name = "chess/play.html"
     def get(self,request):
 
-        return render(request,self.template_name,{})
+        game = GameController(player1='ashsih',player2='ashwin')
+        if game.boardChange():
+            context = {"sample" : game.getGameData()}
+        
+            # print(context)
+        return render(request,self.template_name,context)
 
