@@ -1,16 +1,134 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h1>Image to play</h1>
-    
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Virtual Chess</title>
+	{% load static %}
+	{% load crispy_forms_tags %}
+	{% load widget_tweaks %}
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-        <button type="submit">Submit</button>
-    </form>
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
- 
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAJCAIAAACExCpEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAASSURBVChTY5DutMGDRqZ0pw0A4ZNOwQNf">
-    
-{% endblock %}
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<style>
+	body {
+	background: url('../../static/images/bg2.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	}
+	.headline1{
+		text-align: center;
+		color: white;
+		margin-top: 50px;
+		font-size:70px;
+		font-weight: bold;
+		/*text-decoration: underline;*/
+		text-indent: 30px;
+		word-spacing: 10px;
+		/*text-shadow: 3px 3px 5px red ;*/
+		/*text-shadow: 4px 4px 6px #000000;*/
+		text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+		/*font-family: 'Titillium Web', sans-serif;*/
+	}
+	.btn {
+	  position: relative;
+	  top: 50%;
+	  left: 5%;
+	  /*transform: translate(-50%, -50%);
+	  -ms-transform: translate(-50%, -50%);*/
+	  /*background-color: #f1f1f1;*/
+	  background-color: green;
+	  color: white;
+	  font-size: 25px;
+	  font-weight: bold;
+	  padding: 16px 30px;
+	  border: none;
+	  cursor: pointer;
+	  border-radius: 10px;
+	  text-align: center;
+	}
+	.btn:hover {
+	  background-color: #000000;
+	  color: white;
+	}
+	.button {
+	  display: inline-block;
+	  padding: 15px 25px;
+	  font-size: 24px;
+	  cursor: pointer;
+	  position: absolute;
+	  top: 30%;
+	  left: 40%;
+	  text-align: center;
+	  text-decoration: none;
+	  outline: none;
+	  color: #fff;
+	  background-color: #4CAF50;
+	  border: none;
+	  border-radius: 15px;
+	  box-shadow: 0 9px #999;
+	}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+</style>
+<body>
+	<div class="container">
+		<h1 class="bg-secondary text-white headline1">Virtual Chess Environment</h1>
+		<button class="button">Let's Play</button>
+	</div>
+
+	<div class="flex-container hidden" style="display: none">
+		<div >
+		<center>
+		<form method="POST" >
+	        {% csrf_token %}
+	        {% for hidden in forms.hidden_fields %}
+				{{ hidden }}
+			{% endfor %}
+
+			{% for field in form.visible_fields %}
+				<div class="form-group form-inline form-cust">
+				<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+				{{ field| add_class:'form-control' }}
+				</div>
+				{% for error in field.errors %}
+				<span>{{ error }}</span>
+				{% endfor %}
+			{% endfor %}
+	       
+	        <button type="submit" class="btn" >Submit</button>
+	    </form>
+	    </center>
+	    </div>
+	</div>
+    <script type="text/javascript">
+    $(document).ready(function(){
+  		$(".button").click(function(){
+    	$(".hidden").show().animate({
+			opacity:'0.6',
+		});
+		$(".button").hide();
+  		});
+	});
+    </script>
+</body>
+</html>

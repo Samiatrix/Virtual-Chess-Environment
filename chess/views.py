@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View 
 import base64
 from .models import *
@@ -16,9 +16,8 @@ class IndexView(View):
         if request.method == "POST":
             form = PlayDetailForm(request.POST)
             if form.is_valid():
-                print(form)
                 form.save()     
-                return self.get(request)  
+                return redirect("play")
         else:
             form = PlayDetailForm()         
         context = {

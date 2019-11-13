@@ -1,6 +1,66 @@
-{% extends 'base.html' %}
+<html>
+    <head>
+        <title>Virtual Chess</title>
+        {% load static %}
+                <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-{% block content %}
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+        body {
+            background: url('../../static/images/bg2.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+                    <a class="navbar-brand" href="#">V.Chess</a>
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                      </li>
+                    </ul>
+                  </nav>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                {% for key,value in sample.items %}
+            
+                    {% if key == "image" %}
+                        <div >
+                            <img width="100%" height="600px"  alt="Embedded Image" src="data:image/png;base64,{{value}}" style="margin=30px;">
+                        </div>
+                    {% else %}
+                        <!-- <p>{{value}}</p> -->
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-lg-4" style="background-color:black;">
+            </div>
+        </div>
+    </div>
+        
+    <br>    
+    </body>
+</html>
+
+<!-- {% block content %}
     <h1>Yes Play</h1>
     {% for key,value in sample.items %} 
         
@@ -14,4 +74,4 @@
     {% endfor %}
     <br>
 
-{% endblock %}
+{% endblock %} -->

@@ -1,0 +1,37 @@
+.headline1 {
+	text-align: center;
+	color: white;
+	text-decoration: underline;
+}
+
+.hidden {
+	/*visibility: hidden;*/
+	display: none;
+	color: white;
+	margin-left: ;
+	margin-top : ;
+}
+
+.flex-container {
+  display: flex;
+  background-color: DodgerBlue;
+  margin-left: 450px;
+  margin-right: 450px;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  color:black;
+  max-width: 700px;
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+}
+.form-cust{
+	margin-top: 25px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+.form-cust>input{
+	margin-left: 25px;
+}
