@@ -37,18 +37,16 @@
 		/*text-decoration: underline;*/
 		text-indent: 30px;
 		word-spacing: 10px;
-		/*text-shadow: 3px 3px 5px red ;*/
-		/*text-shadow: 4px 4px 6px #000000;*/
-		text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+		text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black;
 		/*font-family: 'Titillium Web', sans-serif;*/
 	}
-	.btn {
+	/* .btn {
 	  position: relative;
 	  top: 50%;
 	  left: 5%;
 	  /*transform: translate(-50%, -50%);
 	  -ms-transform: translate(-50%, -50%);*/
-	  /*background-color: #f1f1f1;*/
+	  /*background-color: #f1f1f1;
 	  background-color: green;
 	  color: white;
 	  font-size: 25px;
@@ -58,45 +56,37 @@
 	  cursor: pointer;
 	  border-radius: 10px;
 	  text-align: center;
-	}
+	} 
 	.btn:hover {
 	  background-color: #000000;
 	  color: white;
-	}
+	}*/
 	.button {
-	  display: inline-block;
-	  padding: 15px 25px;
 	  font-size: 24px;
 	  cursor: pointer;
-	  position: absolute;
-	  top: 30%;
-	  left: 40%;
 	  text-align: center;
 	  text-decoration: none;
 	  outline: none;
-	  color: #fff;
-	  background-color: #4CAF50;
 	  border: none;
-	  border-radius: 15px;
-	  box-shadow: 0 9px #999;
+
 	}
 
-.button:hover {background-color: #3e8e41}
+/* .button:hover {background-color: #3e8e41}
 
 .button:active {
-  background-color: #3e8e41;
+  /* background-color: #3e8e41;
   box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
+  transform: translateY(4px); 
+} */
 
 </style>
 <body>
 	<div class="container">
-		<h1 class="bg-secondary text-white headline1">Virtual Chess Environment</h1>
-		<button class="button">Let's Play</button>
+		<h1 class="text-white headline1">Virtual Chess Environment</h1>
+		<center><button id="play" class="button hvr-bounce-to-right hvr-shadow" onmouseover="document.getElementById('play').innerHTML = 'Let\'s GO, Have Fun'" onmouseout="document.getElementById('play').innerHTML = 'Are you Ready????'">Are you Ready????</button></center>
 	</div>
 
-	<div class="flex-container hidden" style="display: none">
+	<div class=" hidden" style="display: none">
 		<div >
 		<center>
 		<form method="POST" >
@@ -106,16 +96,16 @@
 			{% endfor %}
 
 			{% for field in form.visible_fields %}
-				<div class="form-group form-inline form-cust">
+				<div class="form-group form-cust">
 				<label for="{{ field.id_for_label }}">{{ field.label }}</label>
-				{{ field| add_class:'form-control' }}
+				<div style="width: 40%">{{ field| add_class:'form-control' }}</div>
 				</div>
 				{% for error in field.errors %}
 				<span>{{ error }}</span>
 				{% endfor %}
 			{% endfor %}
 	       
-	        <button type="submit" class="btn" >Submit</button>
+	        <button class="btn btn-danger" >Submit</button>
 	    </form>
 	    </center>
 	    </div>
@@ -123,9 +113,7 @@
     <script type="text/javascript">
     $(document).ready(function(){
   		$(".button").click(function(){
-    	$(".hidden").show().animate({
-			opacity:'0.6',
-		});
+    	$(".hidden").show();
 		$(".button").hide();
   		});
 	});
