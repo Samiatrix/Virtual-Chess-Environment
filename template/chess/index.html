@@ -93,8 +93,10 @@
             <div class="header-overlay"></div>
                 <div class="header-content">
                     <h1>Virtual Chess Environment</h1>
-                    <button id="play" class="button hvr-bounce-to-right hvr-shadow" onmouseover="document.getElementById('play').innerHTML = 'Let\'s GO, Have Fun'" onmouseout="document.getElementById('play').innerHTML = 'Are you Ready????'">Are you Ready????</button>
-					
+					<div class="wrapper">
+						<a href="#" class="fancy-button pop-onhover bg-gradient1 button"><span>Start !!!</span></a>
+					</div>
+
 					<div class=" hidden" style="display: none">
 						<div >
 						<center>
@@ -113,7 +115,11 @@
 								<span>{{ error }}</span>
 								{% endfor %}
 							{% endfor %}
-						   
+								
+							<div class="wrapper">
+								<a href="#" class="fancy-button pop-onhover bg-gradient3"><span>Submit</span></a>
+							</div>
+
 							<button class="btn btn-danger" >Submit</button>
 						</form>
 						</center>
