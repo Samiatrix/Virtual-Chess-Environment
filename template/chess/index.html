@@ -81,35 +81,47 @@
 
 </style>
 <body>
-	<div class="container">
+	<!-- <div class="container">
 		<h1 class="text-white headline1">Virtual Chess Environment</h1>
 		<center><button id="play" class="button hvr-bounce-to-right hvr-shadow" onmouseover="document.getElementById('play').innerHTML = 'Let\'s GO, Have Fun'" onmouseout="document.getElementById('play').innerHTML = 'Are you Ready????'">Are you Ready????</button></center>
-	</div>
+	</div> -->
 
-	<div class=" hidden" style="display: none">
-		<div >
-		<center>
-		<form method="POST" >
-	        {% csrf_token %}
-	        {% for hidden in forms.hidden_fields %}
-				{{ hidden }}
-			{% endfor %}
+	<header class="v-header container">
+        <div class="fullscreen-video-wrap">
+            <video src="{% static 'chess.mp4' %}" autoplay="true" loop="true"></video>
+        </div>
+            <div class="header-overlay"></div>
+                <div class="header-content">
+                    <h1>Virtual Chess Environment</h1>
+                    <button id="play" class="button hvr-bounce-to-right hvr-shadow" onmouseover="document.getElementById('play').innerHTML = 'Let\'s GO, Have Fun'" onmouseout="document.getElementById('play').innerHTML = 'Are you Ready????'">Are you Ready????</button>
+					
+					<div class=" hidden" style="display: none">
+						<div >
+						<center>
+						<form method="POST" >
+							{% csrf_token %}
+							{% for hidden in forms.hidden_fields %}
+								{{ hidden }}
+							{% endfor %}
+				
+							{% for field in form.visible_fields %}
+								<div class="form-group form-cust">
+								<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+								<div style="width: 40%">{{ field| add_class:'form-control' }}</div>
+								</div>
+								{% for error in field.errors %}
+								<span>{{ error }}</span>
+								{% endfor %}
+							{% endfor %}
+						   
+							<button class="btn btn-danger" >Submit</button>
+						</form>
+						</center>
+						</div>
+					</div>
+                </div>
+    </header>
 
-			{% for field in form.visible_fields %}
-				<div class="form-group form-cust">
-				<label for="{{ field.id_for_label }}">{{ field.label }}</label>
-				<div style="width: 40%">{{ field| add_class:'form-control' }}</div>
-				</div>
-				{% for error in field.errors %}
-				<span>{{ error }}</span>
-				{% endfor %}
-			{% endfor %}
-	       
-	        <button class="btn btn-danger" >Submit</button>
-	    </form>
-	    </center>
-	    </div>
-	</div>
     <script type="text/javascript">
     $(document).ready(function(){
   		$(".button").click(function(){
