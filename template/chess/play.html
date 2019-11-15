@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Virtual Chess</title>
+        <meta http-equiv="refresh" content="300">
         {% load static %}
                 <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -15,7 +16,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <style>
         body {
-            background: url('../../static/images/bg2.jpg') no-repeat center center fixed;
+            background: url('../../static/images/till.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -23,6 +24,15 @@
             width: 100%;
             height: 100%;
             }
+        #dynami {
+            color: white;
+            margin-top: 80px;
+            margin-left: 50px; 
+            overflow-y: scroll;
+            width:680px;
+            height: 350px;
+            /* background-color: whitesmoke; */
+        }
         </style>
     </head>
     <body>
@@ -39,39 +49,46 @@
                   </nav>
         <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 {% for key,value in sample.items %}
             
                     {% if key == "image" %}
-                        <div >
-                            <img width="100%" height="600px"  alt="Embedded Image" src="data:image/png;base64,{{value}}" style="margin=30px;">
+                        <div style="margin-top: 100px; ">
+                            <img width="100%" height="480px"  alt="Embedded Image" src="data:image/png;base64,{{value}}" style="margin=30px;">
                         </div>
                     {% else %}
                         <!-- <p>{{value}}</p> -->
                     {% endif %}
                 {% endfor %}
             </div>
-            <div class="col-lg-4" style="background-color:black;">
+            <div class="col-lg-6"  style="background-color:black;margin-top:100px;">
+                <p id="dynami" ></p>
             </div>
         </div>
     </div>
         
-    <br>    
+    <br>   
+    <script type="text/javascript">
+        // var time = new Date().getTime();
+        // setInterval(function() {
+        //           window.location.reload();
+        //         }, 3000);
+        function loadlink(){
+            $.ajax({url: "/end/", success: function(result){
+                console.log(result["cont"])
+                // $("#dynami").html(result["cont"])
+                $("#dynami").append("<br>"+result["cont"]);
+            }});
+        }
+        loadlink();
+        setInterval(function(){
+            loadlink()
+            var objDiv = document.getElementById("dynami");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        }, 3000);
+
+        
+    </script>
+    
     </body>
 </html>
-
-<!-- {% block content %}
-    <h1>Yes Play</h1>
-    {% for key,value in sample.items %} 
-        
-        {% if key == "image" %}
-            <div >
-                <img style="width: 1000px; height: 600px;" alt="Embedded Image" src="data:image/png;base64,{{value}}">
-            </div>
-        {% else %}
-            <p>{{value}}</p>
-        {% endif %}
-    {% endfor %}
-    <br>
-
-{% endblock %} -->

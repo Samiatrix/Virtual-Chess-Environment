@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chess',
     'crispy_forms',
-    'widget_tweaks'
+    'widget_tweaks',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
