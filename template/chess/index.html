@@ -100,7 +100,7 @@
 					<div class=" hidden" style="display: none">
 						<div >
 						<center>
-						<form method="POST" >
+						<form method="POST" id="sbform" >
 							{% csrf_token %}
 							{% for hidden in forms.hidden_fields %}
 								{{ hidden }}
@@ -117,10 +117,11 @@
 							{% endfor %}
 								
 							<div class="wrapper">
-								<a href="#" class="fancy-button pop-onhover bg-gradient3"><span>Submit</span></a>
+								<a href="#" class="fancy-button pop-onhover bg-gradient3" onclick="document.getElementById('sbform').submit();" ><span>Submit</span></a>
+
 							</div>
 
-							<button class="btn btn-danger" >Submit</button>
+							<!-- <button class="btn btn-danger" >Submit</button> -->
 						</form>
 						</center>
 						</div>
