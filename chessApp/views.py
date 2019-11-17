@@ -7,12 +7,21 @@ import json
 import base64
 from .models import *
 from .forms import *
-import os
 import sys
-sys.path.append("../")
-from virtualchess.chessBackend.parse_game import Parse_Game
+import os
+from chessBackend.parse_game import Parse_Game
+from threading import Thread
+import time
 
-# from chess-backend.parse_game import Parse_Game
+
+
+
+
+## Chess-backend Variables
+GameCreator = None
+GameThread = None
+
+
 
 
 
@@ -43,21 +52,31 @@ class IndexView(View):
 
 class GamePlay(View):
     template_name = "chess/play.html"
-    def get(self,request):
+    def get(self,request):  
+        
+        # Taking Global varibles
+        global GameCreator
+        global GameThread
+
+        # Create new game only when no game is on
+        if(GameThread == None):
+            GameCreator = Parse_Game()
+            GameThread = Thread(target= GameCreator.run)
+            GameThread.start()
+
+
 
         # fil = open("chess_engine/engine.txt","r")
         # st = fil.read()
         # print(st)
         # fil.close()
         # game = GameController(player1='ashsih',player2='ashwin')
+                
         
 
-        # Creating New thread for the chess-backend
-        
-
-
-
-        context = {"sam":"ABC"}
+        print("Waiting for some time")
+        time.sleep(5)
+        context = {"Moves":GameCreator.ProcessedData}
         
             # print(context)
         return render(request,self.template_name,context)
@@ -76,17 +95,29 @@ class Endgame(APIView):
     #         return render(request,"chess/endgame.html",context)
 
     def get(self,request):
-        fil = open("chess-backend/engine.txt","r")
-        d = json.load(fil)
-        sv = d[0]["boardSVG"]
+
+        # Taking Global variables
+        global GameThread
+        global GameCreator
+
+
+
+
+        # fil = open("chess-backend/engine.txt","r")
+        # d = "json.load(fil)"
+        # sv = d[0]["boardSVG"]
+
+
+        contents = GameCreator.ProcessedData
+
+
+
+        
+        sv = contents[-1]["boardSVG"]
         
         print("Refreshed")
 
-        print(sys.path)
-        print(os.system("pwd"))
-        
-
         # print(type(d))
         # print(d[0]["boardSVG"])
-        fil.close()
-        return Response({"cont":d, "svg":sv})
+        # fil.close()
+        return Response({"cont":contents, "svg":sv})

@@ -10,7 +10,7 @@ import json
 import os
 
 class Parse_Game:
-    def __init__(self,games_dir = "./" ,game_name = "game1"):
+    def __init__(self,games_dir = "./.Data/" ,game_name = "game1"):
         self.Video = games_dir + game_name + ".mp4"
         self.vid_cap = cv2.VideoCapture(self.Video)
 
@@ -22,7 +22,6 @@ class Parse_Game:
 
         self.RealFrame = None
         self.ProcessedData = []
-        self.run()
 
     
     def run(self):
@@ -35,6 +34,7 @@ class Parse_Game:
         move_count = 0
 
         while (True):
+
             ret, image = self.vid_cap.read()
 
             if(ret == False or  move_count>=len(self.anno)):
