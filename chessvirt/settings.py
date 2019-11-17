@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chess',
+    'chessApp',
     'crispy_forms',
     'widget_tweaks',
     'rest_framework'

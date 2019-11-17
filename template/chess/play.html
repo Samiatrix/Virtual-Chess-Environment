@@ -53,8 +53,9 @@
                 {% for key,value in sample.items %}
             
                     {% if key == "image" %}
-                        <div style="margin-top: 100px; ">
-                            <img width="100%" height="480px"  alt="Embedded Image" src="data:image/png;base64,{{value}}" style="margin=30px;">
+                        <div id="svg" style="margin-top: 100px; ">
+                            
+                            <!-- <img   width="100%" height="480px"  alt="Embedded Image" src="data:image/png;base64,{{value}}" style="margin=30px;"> -->
                         </div>
                     {% else %}
                         <!-- <p>{{value}}</p> -->
@@ -76,8 +77,10 @@
         function loadlink(){
             $.ajax({url: "/end/", success: function(result){
                 console.log(result["cont"])
-                // $("#dynami").html(result["cont"])
-                $("#dynami").append("<br>"+result["cont"]);
+                console.log(result["svg"])
+                $("#svg").html(result["svg"])
+                // $("#dynami").append("<br>"+result["cont"]);
+                
             }});
         }
         loadlink();
