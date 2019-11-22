@@ -21,7 +21,8 @@ class Parse_Game:
         self.engine = chess.engine.SimpleEngine.popen_uci("/usr/local/bin/stockfish")
 
         self.RealFrame = None
-        self.ProcessedData = []
+        self.ProcessedData = None
+        self.winner = None # final structure {"game_result": "player1 or player 2 or draw by repetition draw by stalement or draw by insufficient material" }
 
     
     def run(self):
@@ -34,6 +35,23 @@ class Parse_Game:
         move_count = 0
 
         while (True):
+            
+            if(self.board.is_game_over()):
+                if(self.board.is_stalemate()):
+                    self.winner={"game_result": "Stalemate"}
+
+                if(self.board.is_insufficient_material()):
+                    self.winner={"game_result": "Insufficient material"}
+
+                if(self.board.is_repetition()):
+                    self.winner={"game_result": "Repetition"}
+
+                if(self.board.is_checkmate()):
+                    ass_win = 1
+                    if(len(self.ProcessedData)%2 == 0):
+                        ass_win+=1
+                    self.winner={"game_result": " Winner is Player "+ str(ass_win)}
+
 
             ret, image = self.vid_cap.read()
 
@@ -83,7 +101,7 @@ class Parse_Game:
 
                 }
                
-                self.ProcessedData.append(chance_data.copy())
+                self.ProcessedData = chance_data.copy()
                 
         self.engine.quit()
         # out.close()

@@ -109,15 +109,35 @@ class Endgame(APIView):
 
 
         contents = GameCreator.ProcessedData
-
-
-
         
-        sv = contents[-1]["boardSVG"]
-        
-        print("Refreshed")
+        # sv = contents[-1]["boardSVG"]
+
+        print(contents)
+
+        svg = contents['boardSVG']
+        move_no = contents['moveNo']
+        print("Refreshed")  
+        print(len(contents))
+
+        context = {
+            "svg": contents["boardSVG"],
+            "move_no":contents["moveNo"],
+            "timeOfMove":contents["timeOfMove"],
+            "move":contents["move"],
+            "depthOfSearch":contents["depthOfSearch"],
+            "Score":contents["Score"],
+            "bestCounterMove":contents["bestCounterMove"]
+        }
 
         # print(type(d))
         # print(d[0]["boardSVG"])
         # fil.close()
-        return Response({"cont":contents, "svg":sv})
+        return Response({
+            "svg": contents["boardSVG"],
+            "move_no":contents["moveNo"],
+            "timeOfMove":contents["timeOfMove"],
+            "move":contents["move"],
+            "depthOfSearch":contents["depthOfSearch"],
+            "Score":contents["Score"],
+            "bestCounterMove":contents["bestCounterMove"]
+        })
